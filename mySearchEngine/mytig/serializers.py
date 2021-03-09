@@ -4,7 +4,7 @@ from mytig.models import ProduitEnPromotion, ProduitDisponible
 class ProduitEnPromotionSerializer(ModelSerializer):
     class Meta:
         model = ProduitEnPromotion
-        fields = ('id', 'tigID')
+        fields = ('id', 'tigID', 'newprice')
 
 class ProduitDisponibleSerializer(ModelSerializer):
     class Meta:

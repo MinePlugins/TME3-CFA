@@ -121,7 +121,7 @@ class PutOnSale(APIView):
 class PromoDetail(APIView):
     def get_object(self, pk):
         try:
-            return ProduitEnPromotion.objects.get(pk=pk)
+            return ProduitEnPromotion.objects.get(tigID=pk)
         except ProduitEnPromotion.DoesNotExist:
             raise Http404
 
@@ -130,6 +130,8 @@ class PromoDetail(APIView):
         serializer = ProduitEnPromotionSerializer(prod)
         response = requests.get(baseUrl+'product/'+str(serializer.data['tigID'])+'/')
         jsondata = response.json()
+        jsondata["discount"] = serializer.data['newprice']
+        jsondata["sale"] = True if serializer.data['newprice'] > 0 else False
         return Response(jsondata)
 #    def put(self, request, pk, format=None):
 #        NO DEFITION of put --> server will return "405 NOT ALLOWED"
