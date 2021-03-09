@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'mytig.apps.MytigConfig',
+    'myStockProduct.apps.MystockproductConfig',
 ]
 
 MIDDLEWARE = [

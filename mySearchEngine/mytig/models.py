@@ -4,6 +4,7 @@ from django.db import models
 class ProduitEnPromotion(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     tigID = models.IntegerField(default='-1')
+    newprice = models.FloatField(default=0)
 
     class Meta:
         ordering = ('tigID',)
