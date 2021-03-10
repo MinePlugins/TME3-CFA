@@ -1,0 +1,1 @@
+*/15 * * * * myTidyVEnv/bin/python3 manage.py autoSaleOnQuantityOverflow    >/dev/null 2>&1
