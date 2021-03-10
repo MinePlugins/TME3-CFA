@@ -16,7 +16,7 @@ class Command(BaseCommand):
         jsondata = response.json()
         ProductStock.objects.all().delete()
         for product in jsondata:
-            if product['availability']:
+            if product['availability']: # Verification de la disponibilité et création d'un stock aléatoire
                 serializer = ProductStockSerializer(data={'tigID':str(product['id']), 'quantityInStock':randrange(1, 30)})
                 if serializer.is_valid():
                     serializer.save()

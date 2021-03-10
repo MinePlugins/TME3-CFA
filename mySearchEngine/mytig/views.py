@@ -101,13 +101,13 @@ class PutOnSale(APIView):
         response = requests.get(baseUrl+'product/'+str(pk)+'/')
         jsondata_product = response.json()
         jsondata_product["discount"] = newprice
-        if response.status_code != 404:
-            if prod is not None and prod is not False:
+        if response.status_code != 404: #Verfication de l'existant du produit en ligne
+            if prod is not None and prod is not False: # SI il existe on va le mettre a jour
                 prod.newprice = newprice
                 prod.save()
                 serializer = ProduitEnPromotionSerializer(prod)
                 jsondata['message'] = "Successfully update {} on sale by {}".format(pk, newprice)
-            else:
+            else: #sinon on le crée
                 serializer = ProduitEnPromotionSerializer(data={'tigID':str(pk), 'newprice':newprice})
                 jsondata['message'] = "Successfully put {} on sale by {}".format(pk, newprice)
 
@@ -133,10 +133,7 @@ class PromoDetail(APIView):
         jsondata["discount"] = serializer.data['newprice']
         jsondata["sale"] = True if serializer.data['newprice'] > 0 else False
         return Response(jsondata)
-#    def put(self, request, pk, format=None):
-#        NO DEFITION of put --> server will return "405 NOT ALLOWED"
-#    def delete(self, request, pk, format=None):
-#        NO DEFITION of delete --> server will return "405 NOT ALLOWED"
+
 
 class DispoList(APIView):
     def get(self, request, format=None):
@@ -146,9 +143,7 @@ class DispoList(APIView):
             response = requests.get(baseUrl+'product/'+str(serializer.data['tigID'])+'/')
             jsondata = response.json()
             res.append(jsondata)
-        return JsonResponse(res, safe=False)
-#    def post(self, request, format=None):
-#        NO DEFITION of post --> server will return "405 NOT ALLOWED"
+        return Response(res)
 
 class DispoDetail(APIView):
     def get_object(self, pk):

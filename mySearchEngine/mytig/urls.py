@@ -3,7 +3,7 @@ from django.urls import path, register_converter, re_path
 
 from mytig import views
 
-class FloatUrlParameterConverter:
+class FloatUrlParameterConverter: #Une class python qui respecte le besoin django pour prendre en charge les flottants
     regex = '[0-9]+\.?[0-9]+'
 
     def to_python(self, value):
